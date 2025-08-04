@@ -1,3 +1,10 @@
+<?php
+    // Récupération des données
+    require_once 'includes/appartements.php';
+    require_once 'includes/maisons.php';
+
+    // var_dump($appartements);
+?>
 <!DOCTYPE html>
 <html lang="fr-fr">
 <head>
@@ -11,8 +18,23 @@
 </head>
 <body>
     <?php require_once 'includes/_header.php' ?>
-    <main>
-
+    <main class="container">
+        <section>
+            <h2>Nos annonces de maisons</h2>
+            <hr>
+            <?php foreach($maisons as $annonce){
+                include 'includes/_card_annnonce.php';
+            } 
+            ?>
+        </section>
+        <section>
+            <h2>Nos annonces d'appartement</h2>
+            <hr>
+            <?php foreach($appartements as $annonce){
+                include 'includes/_card_annnonce.php';
+            } 
+            ?>
+        </section>
     </main>
     <?php require_once 'includes/_footer.php' ?>
 </body>
