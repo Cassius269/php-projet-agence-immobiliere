@@ -35,7 +35,7 @@
             echo 'Données valides';
         }
         echo '<br>';
-var_dump($errors);
+
 
         // Etape 4: redirection de l'utilsateur
 
