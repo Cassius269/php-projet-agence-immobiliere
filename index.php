@@ -1,4 +1,7 @@
 <?php
+    // Démarrage ou reprise de la session
+    session_start();
+    
     // Récupération des données
     require_once 'includes/data/appartements.php';
     require_once 'includes/data/maisons.php';
