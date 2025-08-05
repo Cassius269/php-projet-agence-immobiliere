@@ -1,0 +1,23 @@
+header {
+    position: fixed;
+    z-index: 1;
+    background-color: rgb(238, 232, 232);
+    padding: 0px 1rem;
+}
+
+#typeAnnonce {
+    display: flex;
+    justify-content: end;
+    position: relative;
+    bottom: 2.5rem;
+    left: 1rem;
+}
+
+.card {
+    width: 400px;
+}
+
+
+ul {
+   list-style:  none;
+}
