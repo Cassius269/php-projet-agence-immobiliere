@@ -1,7 +1,7 @@
 <?php
     // Récupération des données
-    require_once 'includes/appartements.php';
-    require_once 'includes/maisons.php';
+    require_once 'includes/data/appartements.php';
+    require_once 'includes/data/maisons.php';
 
     // var_dump($appartements);
 ?>
@@ -19,14 +19,14 @@
     <title>Page d'accueil</title>
 </head>
 <body>
-    <?php require_once 'includes/_header.php' ?>
-    <main class="container">
+    <?php require_once 'includes/partials/_header.php' ?>
+    <main class="container mb-5">
         <section class="mb-5">
             <h2>Nos annonces de maisons</h2>
             <hr>
             <div class="row gap-3">
                 <?php foreach($maisons as $annonce){
-                    include 'includes/_card_annnonce.php';
+                    include 'includes/partials/_card_annnonce.php';
                 } 
             ?>
             </div>
@@ -36,12 +36,12 @@
             <hr>
             <div class="row gap-3">
             <?php foreach($appartements as $annonce){
-                include 'includes/_card_annnonce.php';
+                include 'includes/partials/_card_annnonce.php';
             } 
             ?>
             </div>
         </section>
     </main>
-    <?php require_once 'includes/_footer.php' ?>
+    <?php require_once 'includes/partials/_footer.php' ?>
 </body>
 </html>
