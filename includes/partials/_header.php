@@ -16,7 +16,7 @@
         <!-- Bouton ajouter -->
         <?php if(isset($_SESSION['username']) && isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true ) : ?>
             <li class="nav-item">
-                 <a class="nav-link" href="#">Ajouter</a>
+                 <a class="nav-link" href="../../pages/add_real_estate_annoncement.php">Ajouter</a>
             </li>
         <?php endif; ?>
         <?php if( isset($_SESSION['username']) && isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true) : ?>
