@@ -1,4 +1,4 @@
-    <article class="card col-lg-4">
+    <article class="card col-lg-4 m-auto">
             <img src="<?= $annonce['image'] ?>" alt="">
             <div><?= $annonce['type'] ?></div>
         <div class="card-body">
