@@ -21,18 +21,14 @@
         <?php endif; ?>
         <?php if( isset($_SESSION['username']) && isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Me déconnecter</a>
+                <a class="nav-link" href="../../pages/logout.php">Me déconnecter</a>
             </li>
         <?php else : ?>
             <li class="nav-item">
                 <a class="nav-link" href="../../pages/login.php">Se connecter</a>
             </li>
         <?php endif; ?>
-        <?php if( isset($_SESSION['username']) && isset($_SESSSION['isLoggedIn']) && $_SESSION['isLoggedIn'] === true ) : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="../../pages/login.php">Se connecter</a>
-            </li>
-        <?php endif; ?>
+
       </ul>
     </div>
   </div>
