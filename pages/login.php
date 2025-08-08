@@ -2,6 +2,37 @@
     // Ouvrir la session
     session_start();
 
+    // Importer la connexion à la base de données
+    require '../includes/data/DB.php';
+    // Fonction d'authentification
+     function authenticate(string $email, string $password) //: bool
+    {
+       global $db;
+
+        $sql="SELECT id, email
+            FROM User
+            WHERE email=:email AND password=:password";
+
+        $preparedQuery=$db->prepare($sql);
+
+        $preparedQuery->execute([
+            'email' => $email, 
+            'password' => $password
+        ]);
+
+        $data = $preparedQuery->fetch(PDO::FETCH_ASSOC);
+
+        if($data){
+            // var_dump($data);
+            // exit;
+            return $data;
+        }else {
+            throw new PDOException('Utilisateur inexistant');
+        }
+
+
+ }
+
     // Créer une variable de stockage des erreurs
     $errors = [];
 
@@ -9,15 +40,17 @@
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         // Traitement des données
         // Etape 1: récupération des données saisies
-        $username = $_POST['username'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
 
         // Etape 2: vérification des donnée saisies
-        if($username === 'admin' && $password === 'azerty'){
+        if(authenticate($email, $password)){
             // Stocker les informations utilisateur dans la session
-            $_SESSION['username'] = $username;
+            $user = authenticate($email, $password);
+
+            $_SESSION['email'] = $user['email'];
             $_SESSION['isLoggedIn']= true;
-            // $_SESSION['id_user'] =
+            $_SESSION['id_user'] = $user['id'];
 
             // Etape 3: redirection de l'utilsateur
             header('Location: ../index.php');
@@ -48,8 +81,8 @@
         <h2 class="mb-5"> Créer un compte sur Find My Dream Homee</h2>
         <form action="" method="POST" class="w-50 bg-secondary m-auto p-5 rounded">
             <div>
-                <label for="username" class="form-label">Identifiant</label>
-                <input type="text" id="username" name="username" required class="form-control">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" id="email" name="email" required class="form-control">
             </div>
             <div class="mt-3">
                 <label for="password" class="form-label">Mot de passe</label>

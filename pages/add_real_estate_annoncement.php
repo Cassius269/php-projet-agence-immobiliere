@@ -67,7 +67,7 @@
             try {
                 // Créer une requête SQL préparée et l'executer
             $sql="INSERT INTO Listing(title, description, price, city, image_url, property_type_id, transaction_type_id, user_id, created_at)
-                                    VALUES(:title, :description, :price, :city, :image_url, :property_type_id, :transaction_type_id, 2, NOW())";
+                                    VALUES(:title, :description, :price, :city, :image_url, :property_type_id, :transaction_type_id, :user_id, NOW())";
             
                 // Préparer la requête
                 $preparedQuery = $db->prepare($sql);
@@ -79,7 +79,8 @@
                     'city' => $_POST['localisation'], 
                     'image_url' =>  $_POST['image_url'],
                     'property_type_id' => getPropertyTypeId($_POST['propertyType']),
-                    'transaction_type_id' => getTransactionTypeId($_POST['transactionType'])
+                    'transaction_type_id' => getTransactionTypeId($_POST['transactionType']), 
+                    'user_id' => $_SESSION['id_user']
                 ]);
                 echo 'Nouvelle annonce ajoutée';
             }catch(PDOException $e){

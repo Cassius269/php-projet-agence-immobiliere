@@ -62,3 +62,5 @@ function getTransactionTypeId(string $transactionTypeName) {
         die($e->getMessage());
     }
 }
+
+
