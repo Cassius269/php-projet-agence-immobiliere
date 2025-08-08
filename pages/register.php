@@ -58,7 +58,7 @@
     <?php require_once '../includes/partials/_header.php' ?>
     <main class="container">
         <h2 class="mb-5"> Créer un compte sur Find My Dream Homee</h2>
-        <form action="<?=  $_SERVER['REQUEST_URI'] ?>" method="POST" class="w-50 bg-secondary m-auto p-5 rounded">
+        <form action="" method="POST" class="w-50 bg-secondary m-auto p-5 rounded">
             <div>
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" name="email" required class="form-control">

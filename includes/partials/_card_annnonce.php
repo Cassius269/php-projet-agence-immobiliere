@@ -8,6 +8,7 @@
                 <p class="card-text"><?= $annonce['price'] ?></p>
             </div>
             <p class="card-text"><?= $annonce['localisation'] ?></p>
+            <p class="card-text"><?= $annonce['description'] ?></p>
             <button class="btn btn-primary">Contact</button>
         </div>
     </article>

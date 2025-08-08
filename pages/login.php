@@ -17,6 +17,7 @@
             // Stocker les informations utilisateur dans la session
             $_SESSION['username'] = $username;
             $_SESSION['isLoggedIn']= true;
+            // $_SESSION['id_user'] =
 
             // Etape 3: redirection de l'utilsateur
             header('Location: ../index.php');
@@ -24,8 +25,6 @@
         }else {
             $errors[] = 'identifiants incorrects';
         }
-
-
     }
 ?>
 <!DOCTYPE html>
