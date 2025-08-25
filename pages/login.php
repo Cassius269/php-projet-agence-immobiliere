@@ -78,7 +78,7 @@
     <!-- Inclure le header -->
     <?php require_once '../includes/partials/_header.php' ?>
     <main class="container">
-        <h2 class="mb-5"> Créer un compte sur Find My Dream Homee</h2>
+        <h2 class="mb-5"> Se connecter sur Find My Dream Homee</h2>
         <form action="" method="POST" class="w-50 bg-secondary m-auto p-5 rounded">
             <div>
                 <label for="email" class="form-label">Email</label>
@@ -101,7 +101,7 @@
                 </ul>
             <?php endif; ?>
         </form>
-        <button type="button" class="btn btn-secondary d-block m-auto mt-4"><a href="" class="text-white">Pas encore de compte ? Inscrivez-vous</a></button>
+        <button type="button" class="btn btn-secondary d-block m-auto mt-4"><a href="../pages/register.php" class="text-white">Pas encore de compte ? Inscrivez-vous</a></button>
     </main>    
     <!-- Inclure le footer -->
      <?php require_once '../includes/partials/_footer.php' ?>

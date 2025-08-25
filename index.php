@@ -137,7 +137,7 @@
         <section class="mb-5">
             <h2>Nos annonces de maisons</h2>
             <hr>
-            <div class="row gap-3">
+            <div class="row gap-3 d-flex justify-content-center">
                 <?php foreach($houses as $annonce){
                     include 'includes/partials/_card_annnonce.php';
                 } 
@@ -150,7 +150,7 @@
         <section class="mb-5">
             <h2>Nos annonces d'appartement</h2>
             <hr>
-            <div class="row gap-3">
+            <div class="row gap-3 d-flex justify-content-center">
             <?php foreach($appartments as $annonce){
                 include 'includes/partials/_card_annnonce.php';
             } 
