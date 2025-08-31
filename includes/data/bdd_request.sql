@@ -84,6 +84,30 @@ CALL get_roles_by_email("jean-dupont@email.com");
 SELECT *
 FROM listing;
 
+-- Création d'une procédure stockée de suppression d'annonce immobilière
+DELIMITER //
+CREATE PROCEDURE delete_real_estate_announcement(listing_id int)
+BEGIN
+	DELETE FROM listing
+    WHERE id= listing_id;
+END //
+DELIMITER ;
 
+-- Appel la procédure de suppression d'annonce immobilière
+CALL delete_real_estate_announcement(1);
 
+-- Création d'une procédure stockée de vérification de l'auteur d'une annonce
+DELIMITER //
+CREATE PROCEDURE verify_author_of_announcement(listing_id int, email varchar(255))
+BEGIN
+	SELECT count(*) as compteur
+	FROM listing l
+	INNER JOIN User u
+	ON l.user_id = u.id
+	WHERE l.id= listing_id AND u.email= email;
+END //
+DELIMITER ;
 
+-- Appel de la procédure de vérification de l'auteur d'une annonce
+CALL verify_author_of_announcement(2,'jean-dupont@email.com');
+ 
