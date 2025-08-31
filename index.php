@@ -9,6 +9,28 @@
     // Importation de l'instance de connexion (PDO)
     require_once 'includes/data/DB.php';
 
+    $flashErrors=[];
+    if(isset($_SESSION['flashes']['errors'])){
+        // Extraire les erreurs
+        foreach($_SESSION['flashes']['errors'] as $error){
+            $flashErrors[] = $error;
+        }
+        // Vider les flashs d'erreurs de la session
+        unset($_SESSION['flashes']['errors']);
+            // var_dump($flashErrors);
+            // exit;
+    }
+
+    $flashSucess=[];
+    if(isset($_SESSION['flashes']['success'])){
+        // Extraire les messages de succès
+        foreach($_SESSION['flashes']['success'] as $success){
+            $flashSucess[] = $success;
+        }
+
+        // Vider les messages de succès de la session
+        unset($_SESSION['flashes']['success']);
+    }
     // Récuperer les maisons
     function getAllHouses(){
         // imporater la variable $db de connexion à la base de données
@@ -103,6 +125,7 @@
         ON l.property_type_id=pt.id
         WHERE pt.name='maison'";
 
+        // Execution de la requête directement
         $result=$db->query($sql);
 
         $data = $result->fetch(PDO::FETCH_ASSOC);
@@ -134,6 +157,15 @@
 <body>
     <?php require_once 'includes/partials/_header.php' ?>
     <main class="container mb-5">
+        <ul class="p-0 text-center text-white">
+            <?php foreach($flashErrors as $error) : ?>
+                <li><p class="bg-danger p-2"><?= $error ?></p></li>
+            <?php endforeach; ?>
+            <?php foreach($flashSucess as $success) : ?>
+                <li><p class="bg-success p-2"><?= $success ?></p></li>
+            <?php endforeach; ?>
+        </ul>
+
         <section class="mb-5">
             <h2>Nos annonces de maisons</h2>
             <hr>

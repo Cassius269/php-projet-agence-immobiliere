@@ -52,3 +52,38 @@ FROM listing l
 INNER JOIN property_type pt
 ON l.property_type_id=pt.id
 WHERE pt.name='appartement';
+
+-- Afficher les roles de chaque utilisateur par ordre décroissant
+SELECT u.email, r.name 
+FROM User_roles ur
+INNER JOIN User u 
+ON u.id = ur.user_id
+INNER JOIN role r
+ON r.id = ur.role_id
+ORDER BY u.email DESC;
+
+-- Récupération des rôles d'un utilisateur à partir d'une procédure stockée avec argument
+DELIMITER //
+CREATE PROCEDURE get_roles_by_email(email varchar(255))
+BEGIN
+	SELECT u.email, r.name 
+	FROM User_roles ur
+	INNER JOIN User u 
+	ON u.id = ur.user_id
+	INNER JOIN role r
+	ON r.id = ur.role_id
+    WHERE u.email = email
+	ORDER BY r.name DESC;
+END //
+DELIMITER ;
+
+-- Appeler la procédure de récupération des rôles d'un utilisateur
+CALL get_roles_by_email("jean-dupont@email.com");
+
+
+SELECT *
+FROM listing;
+
+
+
+

@@ -45,3 +45,26 @@ INSERT INTO listing(title, description, price, city, image_url, property_type_id
   SELECT *
   FROM listing;
   
+  -- Peuplement des rôles utilisateurs
+INSERT INTO role(name)
+	VALUES('agent'),
+			('admin'),
+            ('user');
+            
+-- Attribuer des rôles aux utilisateurs
+INSERT INTO User_roles(user_id, role_id, is_activated)
+	VALUES 	(1, 1, 1),
+			(1, 3, 1),
+            (2, 3, 1),
+            (2, 2, 1),
+  			(3, 3, 1),
+            (3, 1, 1),
+            (4, 1, 1),
+			(4, 3, 1),
+            (5, 3, 1),
+            (5, 2, 1),
+            (6, 3, 1),
+            (6, 2, 1);
+                                  
+
+  

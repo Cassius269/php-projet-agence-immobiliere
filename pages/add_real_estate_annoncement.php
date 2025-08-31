@@ -8,6 +8,47 @@
     //Importer les fonctions de requêtage
     require_once '../includes/data/functions.php';
 
+    // Création d'une fonction de vérification des bons rôles pour ajouter une annonnce
+    function verifiyCreateAuthorization(){
+        // Seuls les utilisateurs connectés ayant le rôle **agent ou admin** peuvent y accéder.
+        // Rechercher en base de données les roles de l'utilisateur connecté
+
+        global $db; // importation de l'instance de connexion à la base de données
+
+        try{
+            // Création d'une requête préparée à executée
+            $sql = "CALL get_roles_by_email(:email)";
+            $preparedQuery = $db->prepare($sql);
+            $preparedQuery->execute([
+                'email' => $_SESSION['email']
+            ]);
+
+            $data = $preparedQuery->fetchAll(PDO::FETCH_ASSOC); // obtenir tous les rôles avec fetchAll() sous forme de tableau associatif
+            $roles = [];
+
+            if($data){
+                // Extraire les rôles depuis les résultas
+                foreach($data as $role){
+                    $roles[]= $role['name'];
+                }
+
+                // Rediriger l'utilisteur s'il n'a pas un rôle d'agent ou admin
+                if(!in_array('agent', $roles) && !in_array('admin', $roles)){
+                    // Enregistrer des messages flashs d'erreur d'accès refusé
+                    $_SESSION['flashes']= [
+                        'errors' => ['Accès refusé']
+                    ];
+                    header('Location:../index.php');
+                    exit;
+                }
+            }else {
+                throw new PDOException(('Cette donnée est inexistante'));
+            }
+
+        }catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
 
     // Vérifier si l'utilsateur est connecté ou le rediriger s'il n'est pas en ligne    
     if(!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn']=== false){
@@ -15,6 +56,10 @@
         exit;
     }
 
+    // Vérifier si l'utilisateur a le droit d'accéder à la page de création d'une annonce
+    verifiyCreateAuthorization();
+
+    // Rediriger tout autre utilisateur vers la page d’accueil avec un message d’erreur.
 
     // Stocker les erreurs trouvées
     $errors = [];
@@ -82,7 +127,15 @@
                     'transaction_type_id' => getTransactionTypeId($_POST['transactionType']), 
                     'user_id' => $_SESSION['id_user']
                 ]);
-                echo 'Nouvelle annonce ajoutée';
+                // echo 'Nouvelle annonce ajoutée';
+                
+                // Envoyer un message flash de succès
+                $_SESSION['flashes'] = [
+                    "success" => ['Nouvelle annonce ajoutée']
+                ];
+                header('Location:../index.php');
+                exit;
+
             }catch(PDOException $e){
                 die($e->getMessage());
             }
